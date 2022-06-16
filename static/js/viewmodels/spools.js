@@ -91,10 +91,6 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
 
     self.nameInvalid = ko.pureComputed(() => !self.loadedSpool.name());
 
-    self.colorInvalid = ko.pureComputed(() => false);
-
-    self.descriptionInvalid = ko.pureComputed(() => false);
-
     self.fromSpoolData = function setLoadedSpoolsFromJSObject(data = self.cleanSpool()) {
         self.loadedSpool.isNew(data.id === undefined);
         self.loadedSpool.id(data.id);
@@ -177,6 +173,7 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
     self.updateCallbacks = [];
 
     self.updateSpool = function updateSpoolInBackend(data = self.toSpoolData()) {
+        console.log(data);
         self.requestInProgress(true);
         api.spool.update(data.id, data)
             .done(() => {
