@@ -61,7 +61,7 @@ FilamentManager.prototype.viewModels.selections = function selectedSpoolsViewMod
     self.updateSelectedSpool = function updateSelectedSpoolInBackend(tool, id = null) {
         if (!self.enableSpoolUpdate) return;
 
-        const data = { tool, spool: { id } };
+        const data = { tool, spool: { id }, updateui: true };
 
         self.requestInProgress(true);
         api.selection.update(tool, data)
