@@ -149,6 +149,7 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
     };
 
     self.saveSpool = function saveSpoolToBackend(data = self.toSpoolData()) {
+        console.log(data, self.loadedSpool);
         return self.loadedSpool.isNew() ? self.addSpool(data) : self.updateSpool(data);
     };
 
