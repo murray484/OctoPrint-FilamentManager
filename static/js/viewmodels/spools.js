@@ -15,6 +15,18 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
                 if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) return 1;
                 return 0;
             },
+            color(a, b) {
+                // sorts ascending
+                if (a.color.toLocaleLowerCase() < b.color.toLocaleLowerCase()) return -1;
+                if (a.color.toLocaleLowerCase() > b.color.toLocaleLowerCase()) return 1;
+                return 0;
+            },
+            description(a, b) {
+                // sorts ascending
+                if (a.description.toLocaleLowerCase() < b.description.toLocaleLowerCase()) return -1;
+                if (a.description.toLocaleLowerCase() > b.description.toLocaleLowerCase()) return 1;
+                return 0;
+            },
             material(a, b) {
                 // sorts ascending
                 if (a.profile.material.toLocaleLowerCase() < b.profile.material.toLocaleLowerCase()) return -1;
@@ -52,6 +64,8 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
         return {
             id: undefined,
             name: '',
+            color: '',
+            description: '',
             cost: 20,
             weight: 1000,
             used: 0,
@@ -65,6 +79,8 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
     self.loadedSpool = {
         id: ko.observable(),
         name: ko.observable(),
+        color: ko.observable(),
+        description: ko.observable(),
         profile: ko.observable(),
         cost: ko.observable(),
         totalWeight: ko.observable(),
@@ -75,10 +91,16 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
 
     self.nameInvalid = ko.pureComputed(() => !self.loadedSpool.name());
 
+    self.colorInvalid = ko.pureComputed(() => false);
+
+    self.descriptionInvalid = ko.pureComputed(() => false);
+
     self.fromSpoolData = function setLoadedSpoolsFromJSObject(data = self.cleanSpool()) {
         self.loadedSpool.isNew(data.id === undefined);
         self.loadedSpool.id(data.id);
         self.loadedSpool.name(data.name);
+        self.loadedSpool.color(data.color);
+        self.loadedSpool.description(data.description);
         self.loadedSpool.profile(data.profile.id);
         self.loadedSpool.totalWeight(data.weight);
         self.loadedSpool.cost(data.cost);
@@ -94,6 +116,8 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
         return {
             id: self.loadedSpool.id(),
             name: self.loadedSpool.name(),
+            color: self.loadedSpool.color(),
+            description: self.loadedSpool.description(),
             cost: Utils.validFloat(self.loadedSpool.cost(), defaultSpool.cost),
             weight: totalWeight,
             used: totalWeight - remaining,

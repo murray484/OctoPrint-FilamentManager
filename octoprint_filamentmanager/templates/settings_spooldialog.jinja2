@@ -21,6 +21,30 @@
                 </div>
             </div>
 
+            <!-- description -->
+
+            <div class="control-group" data-bind="css: {error: viewModels.spools.descriptionInvalid()}">
+                <label class="control-label">{{ _('Description') }}</label>
+                <div class="controls">
+                    <input type="text" data-bind="value: viewModels.spools.loadedSpool.description, valueUpdate: 'afterkeydown'">
+                    <span data-bind="visible: viewModels.spools.descriptionInvalid()">
+                        <br><span class="help-inline">{{ _("Description must be set") }}</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- color -->
+
+            <div class="control-group" data-bind="css: {error: viewModels.spools.colorInvalid()}">
+                <label class="control-label">{{ _('Color') }}</label>
+                <div class="controls">
+                    <input type="text" data-bind="value: viewModels.spools.loadedSpool.color, valueUpdate: 'afterkeydown'">
+                    <span data-bind="visible: viewModels.spools.colorInvalid()">
+                        <br><span class="help-inline">{{ _("Color must be set") }}</span>
+                    </span>
+                </div>
+            </div>
+
             <!-- profile -->
 
             <div class="control-group">

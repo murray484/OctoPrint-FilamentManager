@@ -84,6 +84,8 @@ class FilamentManager(object):
                             Column("id", INTEGER, primary_key=True, autoincrement=True),
                             Column("profile_id", INTEGER, nullable=False),
                             Column("name", VARCHAR(255), nullable=False, server_default=""),
+                            Column("color", VARCHAR(255), nullable=True, server_default=""),
+                            Column("description", VARCHAR(255), nullable=True, server_default=""),
                             Column("cost", REAL, nullable=False, server_default="0"),
                             Column("weight", REAL, nullable=False, server_default="0"),
                             Column("used", REAL, nullable=False, server_default="0"),
@@ -252,7 +254,7 @@ class FilamentManager(object):
     def create_spool(self, data):
         with self.lock, self.conn.begin():
             stmt = insert(self.spools)\
-                .values(name=data["name"], cost=data["cost"], weight=data["weight"], used=data["used"],
+                .values(name=data["name"], color=data["color"], description=data["description"], cost=data["cost"], weight=data["weight"], used=data["used"],
                         temp_offset=data["temp_offset"], profile_id=data["profile"]["id"])
             result = self.conn.execute(stmt)
         data["id"] = result.lastrowid
@@ -261,7 +263,7 @@ class FilamentManager(object):
     def update_spool(self, identifier, data):
         with self.lock, self.conn.begin():
             stmt = update(self.spools).where(self.spools.c.id == identifier)\
-                .values(name=data["name"], cost=data["cost"], weight=data["weight"], used=data["used"],
+                .values(name=data["name"], color=data["color"], description=data["description"], cost=data["cost"], weight=data["weight"], used=data["used"],
                         temp_offset=data["temp_offset"], profile_id=data["profile"]["id"])
             self.conn.execute(stmt)
         return data
