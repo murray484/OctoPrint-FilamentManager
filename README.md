@@ -1,5 +1,7 @@
 # OctoPrint-FilamentManager
 
+This version is customized to add a color and description field to the spools database.
+
 ## UNDER NEW MANAGEMENT
 
     Hi everybody,

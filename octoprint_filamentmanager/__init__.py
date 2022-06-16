@@ -446,7 +446,8 @@ class FilamentManagerPlugin(FilamentManagerApi,
 
                 # update method: pip
                 #pip="https://github.com/malnvenshorn/OctoPrint-FilamentManager/archive/{target_version}.zip"
-                pip="https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+                #pip="https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+                pip="https://github.com/murray484/OctoPrint-FilamentManager/releases/latest/download/master.zip"
             )
         )
 
