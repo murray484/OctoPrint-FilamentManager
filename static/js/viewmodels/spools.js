@@ -108,8 +108,9 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
         const defaultSpool = self.cleanSpool();
         const totalWeight = Utils.validFloat(self.loadedSpool.totalWeight(), defaultSpool.weight);
         const remaining = Math.min(Utils.validFloat(self.loadedSpool.remaining(), defaultSpool.weight), totalWeight);
+        
 
-        return {
+        const result = {
             id: self.loadedSpool.id(),
             name: self.loadedSpool.name(),
             color: self.loadedSpool.color(),
@@ -122,6 +123,8 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
                 id: self.loadedSpool.profile(),
             },
         };
+        console.log(result);
+        return result;
     };
 
     const dialog = $('#settings_plugin_filamentmanager_spooldialog');
