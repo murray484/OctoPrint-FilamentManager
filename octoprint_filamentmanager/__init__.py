@@ -244,6 +244,9 @@ class FilamentManagerPlugin(FilamentManagerApi,
         elif Events.PRINT_RESUMED == event:
             self.alreadyCanceled = True
             self._printJobResumed()
+        #elif Events.FILAMENT_CHANGE == event:
+        #    self.alreadyCanceled = True
+        #    self._printJobPaused()
         elif Events.PRINT_DONE == event:
             self._printJobFinished()
         elif Events.PRINT_FAILED == event:

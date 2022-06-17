@@ -362,11 +362,16 @@ class FilamentManagerApi(octoprint.plugin.BlueprintPlugin):
         if "id" not in selection.get("spool", {}):
             return make_response("Selection does not contain mandatory 'id (spool)' field", 400)
 
-        if self._printer.is_printing():
-            return make_response("Trying to change filament while printing", 409)
+        #if self._printer.is_printing():
+        #    return make_response("Trying to change filament while printing", 409)
 
         try:
             if (self.filamentManager != None):
+                # if we're printing, we should update the filament usage before we switch to the new roll.
+                if self._printer.is_printing():
+                    self.filamentManager.update_filament_usage()
+                    self.myFilamentOdometer.reset()
+                
                 saved_selection = self.filamentManager.update_selection(identifier, self.client_id, selection)
                 # Inform (external e.g. OctoPod) UI about spool selection change
                 self.send_client_message("selection_changed", data=dict(table="selections", action="update"))
