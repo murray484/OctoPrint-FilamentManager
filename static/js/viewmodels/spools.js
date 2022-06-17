@@ -123,7 +123,6 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
                 id: self.loadedSpool.profile(),
             },
         };
-        console.log(result);
         return result;
     };
 
@@ -152,7 +151,6 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
     };
 
     self.saveSpool = function saveSpoolToBackend(data = self.toSpoolData()) {
-        console.log(data, self.loadedSpool);
         return self.loadedSpool.isNew() ? self.addSpool(data) : self.updateSpool(data);
     };
 
@@ -177,7 +175,6 @@ FilamentManager.prototype.viewModels.spools = function spoolsViewModel() {
     self.updateCallbacks = [];
 
     self.updateSpool = function updateSpoolInBackend(data = self.toSpoolData()) {
-        console.log(data);
         self.requestInProgress(true);
         api.spool.update(data.id, data)
             .done(() => {
