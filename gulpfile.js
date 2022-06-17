@@ -22,7 +22,7 @@ gulp.task('js', () => {
             presets: ['env'],
             plugins: ['transform-remove-strict-mode']
         }))
-		.pipe(concat('filamentmanager.bundled.js'))
+		//.pipe(concat('filamentmanager.bundled.js'))
 		.pipe(gulp.dest('octoprint_filamentmanager/static/js/'));
 });
 
